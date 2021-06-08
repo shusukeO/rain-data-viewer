@@ -50,7 +50,7 @@ const App = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/Detail">
+            <Route exact path="/Detail/:id">
               <Detail />
             </Route>
             <Route>Sorry! 404やで！このアドレスにページはないよ！</Route>

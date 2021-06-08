@@ -21,7 +21,7 @@ const columns = [
           size="small"
           style={{ marginLeft: 16 }}
           component={Link}
-          to={`Detail?id=${params.id}`}
+          to={`Detail/${params.id}`}
         >
           Open
         </Button>
