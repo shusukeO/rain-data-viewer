@@ -56,7 +56,7 @@ const Home = () => {
 
       fetchData();
       
-    }, []);
+    });
 
 
     return (
