@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from "@material-ui/core/Button";
-import { DataGrid, GridColDef,
-  GridApi,
-  GridCellValue } from '@material-ui/data-grid';
+import { DataGrid} from '@material-ui/data-grid';
 import Paper from '@material-ui/core/Paper';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const columns = [
   {
@@ -35,25 +34,36 @@ const columns = [
 
 ];
 
-const rows = [
-  { id: 1, stime: '1621739240165', title: '30.2'},
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
-
 
 const Home = () => {
+
+    const [data, setData] = useState([]);
+    const [update, setUpdate] = useState("no data");
+
+    useEffect(() => {
+      const fetchData = async () => {
+        let readRows = [];
+        const result = await axios(
+          'http://localhost:8000/api/getItems',
+        );
+        result.data.logs.map((row) => {
+          readRows.push({id: row._id, stime: row.stime, title: row.title});
+        });
+
+        setData(readRows);
+        setUpdate("");
+      };
+
+      fetchData();
+      
+    }, []);
+
 
     return (
         <Paper>
           <div style={{ height: 600, width: '100%' }}>
-            <DataGrid rows={rows} columns={columns} pageSize={10}  />
+            {update}
+            <DataGrid rows={data} columns={columns} pageSize={10}  />
           </div>
         </Paper>
     )
