@@ -9,10 +9,10 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import LineChart from "./LineChart";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -43,11 +43,9 @@ const Detail = () => {
     fetchData();
   }, [data.title, id]);
 
-  const updateTitle = () => {};
-
   return (
     <Paper>
-      <Container component="main" maxWidth="xs">
+      <Container component="main">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -85,12 +83,10 @@ const Detail = () => {
           <Typography component="h1" variant="subtitle1">
             stime: {data.stime}
           </Typography>
+
+          <LineChart acceleration={data.acceleration || null} />
         </div>
       </Container>
-      {/* <div>
-                Detailページやで({id})
-                {title}
-            </div> */}
     </Paper>
   );
 };
