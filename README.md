@@ -1,3 +1,8 @@
+# 概要
+
+![デモ動画](https://gyazo.com/85ca52302f2a089e0a44db7977e3bac6)  
+スマートウォッチから送られてきたデータを管理するシステム。React 製。
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
