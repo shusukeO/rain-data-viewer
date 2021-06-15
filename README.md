@@ -1,6 +1,6 @@
 # 概要
 
-![デモ動画](https://gyazo.com/85ca52302f2a089e0a44db7977e3bac6)  
+![デモ動画](https://gyazo.com/85ca52302f2a089e0a44db7977e3bac6/raw)  
 スマートウォッチから送られてきたデータを管理するシステム。React 製。
 
 # Getting Started with Create React App
