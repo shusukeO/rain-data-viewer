@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -32,6 +32,26 @@ const Detail = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [title, setTitle] = useState("");
+
+  const history = useHistory();
+
+  const updateTitle = () => {
+    axios
+      .post(`http://localhost:8000/api/write/${id}`, {
+        title: title,
+      })
+      .then(function (response) {
+        console.log(response.data);
+      });
+    history.goBack();
+  };
+
+  const deleteItem = () => {
+    axios.post(`http://localhost:8000/api/delete/${id}`).then((res) => {
+      console.log(res.data);
+    });
+    history.goBack();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,6 +96,18 @@ const Detail = () => {
                 className={classes.submit}
               >
                 Upadate
+              </Button>
+            </Grid>
+            <Grid item>　</Grid>
+            <Grid item>
+              <Button
+                onClick={deleteItem}
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Delete
               </Button>
             </Grid>
           </Grid>
