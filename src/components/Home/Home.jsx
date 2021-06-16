@@ -38,6 +38,7 @@ const Home = () => {
   const [update, setUpdate] = useState("no data");
 
   useEffect(() => {
+    let unmounted = false;
     const fetchData = async () => {
       let readRows = [];
       const result = await axios("http://localhost:8000/api/getItems");
@@ -45,11 +46,17 @@ const Home = () => {
         readRows.push({ id: row._id, stime: row.stime, title: row.title });
       });
 
-      setData(readRows);
-      setUpdate("");
+      if (!unmounted) {
+        setData(readRows);
+        setUpdate("");
+      }
     };
-
     fetchData();
+
+    const cleanup = () => {
+      unmounted = true;
+    };
+    return cleanup;
   });
 
   return (
